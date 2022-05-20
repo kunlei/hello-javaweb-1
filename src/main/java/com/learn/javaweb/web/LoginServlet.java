@@ -2,6 +2,7 @@ package com.learn.javaweb.web;
 
 import com.learn.javaweb.mapper.UserMapper;
 import com.learn.javaweb.pojo.User;
+import com.learn.javaweb.util.SqlSessionFactoryUtils;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintWriter;
@@ -25,9 +26,7 @@ public class LoginServlet extends HttpServlet {
     String password = request.getParameter("password");
 
     // invoke mybatis
-    String resource = "mybatis-config.xml";
-    InputStream inputStream = Resources.getResourceAsStream(resource);
-    SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
+    SqlSessionFactory sqlSessionFactory = SqlSessionFactoryUtils.getSqlSessionFactory();
 
     // acquire session
     SqlSession sqlSession = sqlSessionFactory.openSession();
